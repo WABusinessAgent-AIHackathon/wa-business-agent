@@ -1,0 +1,17 @@
+{
+  "id": "faq_17",
+  "question": "I have a question about the new long-term care insurance program.",
+  "answer": "For information pertaining to the WA Cares Fund program/long-term care coverage please visit the Learn More FAQ page at https://wacaresfund.wa.gov/learn-more/, which also contains specific FAQ’s for employers. \nPlease direct any further questions to the WA Cares Fund program using the form at https://wacaresfund.wa.gov/contact-us/.",
+  "links": [
+    {
+      "text": "https://wacaresfund.wa.gov/learn-more/",
+      "value": "https://wacaresfund.wa.gov/learn-more/",
+      "type": "url"
+    },
+    {
+      "text": "https://wacaresfund.wa.gov/contact-us/",
+      "value": "https://wacaresfund.wa.gov/contact-us/",
+      "type": "url"
+    }
+  ]
+}

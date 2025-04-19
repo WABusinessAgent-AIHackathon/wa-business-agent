@@ -1,0 +1,17 @@
+{
+  "id": "faq_11",
+  "question": "How do I set up my business as a Sole Proprietorship?",
+  "answer": "To set up a business as a Sole Proprietorship or other non-corporate entity, file for a Washington State Business License with Business Licensing Service through the myDOR system: https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license. This will set up your business tax account and you will be provided with a Unified Business Identifier (UBI) number.\nWe recommend using the Business Licensing Wizard, located at: http://secure.dor.wa.gov/gteauth/?Link=wiz for information on any other licenses or permits that may be required based on the location and type of business\nFor questions on the business license application or wizard, contact the Business Licensing Service at 360-705-6741.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license",
+      "value": "https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license",
+      "type": "url"
+    },
+    {
+      "text": "http://secure.dor.wa.gov/gteauth/?Link=wiz",
+      "value": "http://secure.dor.wa.gov/gteauth/?Link=wiz",
+      "type": "url"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "faq_14",
+  "question": "How do I set up payroll accounts as an out-of-state employer?",
+  "answer": "To set up payroll accounts in Washington, file or refile a Washington State Business License with the Department of Revenue, Business Licensing Service. Your business information is automatically forwarded to the Employment Security Department and Department of Labor & Industries to set up your Unemployment Insurance and Workers Compensation accounts. \nFor more information, visit: https://dor.wa.gov/manage-business/grow-business/hiring-employees and contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov with additional questions\nAlso, nearly all employers in the State of Washington have responsibilities under the Paid Family and Medical Leave Program.  For additional information, visit: https://www.paidleave.wa.gov and contact the Employment Security Department at 833-717-2273 or paidleave@esd.wa.gov with additional questions.\nNote: If you are doing business in Washington, you must also register with the Washington Secretary of State.  For information, visit: https://www.sos.wa.gov/corps/foreign-entity-registration-and-forms.aspx and contact the Secretary of State at 360-725-0358 or corps@sos.wa.gov with any additional questions.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/manage-business/grow-business/hiring-employees",
+      "value": "https://dor.wa.gov/manage-business/grow-business/hiring-employees",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    },
+    {
+      "text": "https://www.paidleave.wa.gov",
+      "value": "https://www.paidleave.wa.gov",
+      "type": "url"
+    },
+    {
+      "text": "paidleave@esd.wa.gov",
+      "value": "mailto:paidleave@esd.wa.gov",
+      "type": "email"
+    },
+    {
+      "text": "https://www.sos.wa.gov/corps/foreign-entity-registration-and-forms.aspx",
+      "value": "https://www.sos.wa.gov/corps/foreign-entity-registration-and-forms.aspx",
+      "type": "url"
+    },
+    {
+      "text": "corps@sos.wa.gov",
+      "value": "mailto:corps@sos.wa.gov",
+      "type": "email"
+    }
+  ]
+}

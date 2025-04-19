@@ -1,0 +1,32 @@
+{
+  "id": "",
+  "question": "Who needs a business license?",
+  "answer": "You need a business license if your business meets any of the following conditions:\n\nYour business requires city and state endorsements.\nYou are doing business using a name other than your full name legal name.\nYou plan to hire employees within the next 90 days.\nYou sell a product or provide a service that requires the collection of sales tax.\nYour gross income is $12,000 per year or more.\nYour business is required to pay taxes or fees to the Department of Revenue.\nYou are a buyer or processor of specialty wood products.\n\nFor more details or to apply for a business license, visit: https://dor.wa.gov/open-business/apply-business-license",
+  "links": [
+    {
+      "text": "city",
+      "value": "https://dor.wa.gov/manage-business/city-license-endorsements",
+      "type": "url"
+    },
+    {
+      "text": "state",
+      "value": "https://dor.wa.gov/manage-business/state-endorsements",
+      "type": "url"
+    },
+    {
+      "text": "collection of sales tax",
+      "value": "https://dor.wa.gov/taxes-rates/retail-sales-tax",
+      "type": "url"
+    },
+    {
+      "text": "taxes or fees",
+      "value": "https://dor.wa.gov/taxes-rates/other-taxes",
+      "type": "url"
+    },
+    {
+      "text": "https://dor.wa.gov/open-business/apply-business-license",
+      "value": "https://dor.wa.gov/open-business/apply-business-license",
+      "type": "url"
+    }
+  ]
+}

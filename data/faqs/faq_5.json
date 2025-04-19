@@ -1,0 +1,12 @@
+{
+  "id": "faq_5",
+  "question": "How do I file a Business Entity Conversion? For example, changing an Oregon LLC into a Washington LLC?",
+  "answer": "A business entity conversion lets a business change its home jurisdiction or type of entity.\nPlease note that Sole Proprietorships are not considered a type of business entity. \nFor guidance, filing tips, and examples, visit the Corporations and Charities Division’s webpage on Business Entity Conversions at this link.",
+  "links": [
+    {
+      "text": "link",
+      "value": "https://www.sos.wa.gov/corporations-charities/resources/business-entity-conversions",
+      "type": "url"
+    }
+  ]
+}

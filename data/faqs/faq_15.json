@@ -1,0 +1,17 @@
+{
+  "id": "faq_15",
+  "question": "How much does it cost to file a Business License application?",
+  "answer": "A non-refundable Business License Application processing fee is required for each application received in addition to applicable endorsement or trade name fees.\nOpen/reopen a business - $90\r\nIf you are opening the first location of a new business/UBI or re-opening a business/UBI that has no active locations.\nAny other purpose - $19\r\nIf you are filing for any purpose other than those listed above.\n(Examples: Hiring employees, registering a trade name, adding additional endorsements to an existing location, etc.)\nFor more processing fee details, visit: https://dor.wa.gov/open-business/apply-business-license/variable-business-license-fees or contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/open-business/apply-business-license/variable-business-license-fees",
+      "value": "https://dor.wa.gov/open-business/apply-business-license/variable-business-license-fees",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    }
+  ]
+}

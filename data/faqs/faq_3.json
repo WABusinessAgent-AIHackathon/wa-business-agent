@@ -1,0 +1,12 @@
+{
+  "id": "faq_3",
+  "question": "Do I need a business license to drive for Amazon/Uber/Lyft?",
+  "answer": "Getting started as a driver with Uber, Lyft, or a similar service can get a little more complicated than you might think because there are potentially licenses, taxes, and insurances you need to consider. We have written a brief guide to help you sort it all out by answering some common questions. Click this link to read the guide.",
+  "links": [
+    {
+      "text": "Click this link to read the guide.",
+      "value": "https://www.business.wa.gov/site/alias__business/1574/thinking-about-driving-for-uber-or-lyft.aspx",
+      "type": "url"
+    }
+  ]
+}

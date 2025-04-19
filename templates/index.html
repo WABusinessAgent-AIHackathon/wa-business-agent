@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WA Business Agent</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Washington Business Assistant</h1>
+            <p class="text-gray-600 mt-2">Your guide to starting and running a business in Washington State</p>
+        </header>
+
+        <!-- Quick Access Menu -->
+        <div class="max-w-3xl mx-auto mb-6">
+            <div class="bg-white rounded-lg shadow-lg p-4 mb-6">
+                <h2 class="text-lg font-semibold mb-3">Quick Access</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="font-medium mb-2">Business Information</h3>
+                        <div class="space-y-2">
+                            <button onclick="fetchEndpoint('fees')" 
+                                    class="w-full text-left px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded">
+                                📋 Business License Fees
+                            </button>
+                            <button onclick="fetchEndpoint('starting-steps')" 
+                                    class="w-full text-left px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded">
+                                🚀 Starting Steps
+                            </button>
+                            <button onclick="fetchEndpoint('essential-links')" 
+                                    class="w-full text-left px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded">
+                                🔗 Essential Resources
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-medium mb-2">Minimum Wage Information</h3>
+                        <div class="space-y-2">
+                            <button onclick="fetchMinimumWage('washington')" 
+                                    class="w-full text-left px-4 py-2 bg-green-50 hover:bg-green-100 rounded">
+                                💵 WA State Minimum Wage
+                            </button>
+                            <button onclick="fetchMinimumWage('seattle')" 
+                                    class="w-full text-left px-4 py-2 bg-green-50 hover:bg-green-100 rounded">
+                                💵 Seattle Minimum Wage
+                            </button>
+                            <button onclick="showLocationPrompt()" 
+                                    class="w-full text-left px-4 py-2 bg-green-50 hover:bg-green-100 rounded">
+                                🔍 Check Other Locations
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
+            <div id="chat-container" class="space-y-4 mb-6 h-96 overflow-y-auto">
+                <!-- Chat messages will appear here -->
+            </div>
+
+            <div class="flex space-x-4">
+                <input type="text" 
+                       id="user-input" 
+                       class="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                       placeholder="Type your question here...">
+                <button onclick="sendMessage()" 
+                        class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location Prompt Modal -->
+    <div id="location-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-xl">
+            <h3 class="text-lg font-semibold mb-4">Enter Location</h3>
+            <input type="text" 
+                   id="location-input" 
+                   class="w-full p-2 border border-gray-300 rounded mb-4"
+                   placeholder="e.g., seattle, tukwila">
+            <div class="flex justify-end space-x-2">
+                <button onclick="closeLocationPrompt()" 
+                        class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+                    Cancel
+                </button>
+                <button onclick="submitLocation()" 
+                        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+                    Check
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const userInput = document.getElementById('user-input');
+        const locationModal = document.getElementById('location-modal');
+        const locationInput = document.getElementById('location-input');
+
+        async function fetchEndpoint(endpoint) {
+            try {
+                const response = await fetch(`/api/${endpoint}`);
+                const data = await response.json();
+                
+                let formattedContent = '';
+                
+                if (endpoint === 'fees') {
+                    formattedContent = '<h3 class="font-bold mb-2">Business License Fees:</h3><div class="space-y-2">';
+                    for (const [key, value] of Object.entries(data)) {
+                        const formattedKey = key.split('_').map(word => 
+                            word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ');
+                        formattedContent += `<div><strong>${formattedKey}:</strong> $${value.toFixed(2)}</div>`;
+                    }
+                    formattedContent += '</div>';
+                } else if (endpoint === 'starting-steps') {
+                    formattedContent = '<h3 class="font-bold mb-2">Steps to Start a Business:</h3><ul class="space-y-4">';
+                    data.steps.forEach(step => {
+                        formattedContent += `
+                            <li class="bg-gray-50 p-4 rounded">
+                                <div class="font-semibold">${step.step}</div>
+                                <div class="text-gray-600 mt-1">${step.description}</div>
+                                <ul class="list-disc ml-5 mt-2">
+                                    ${step.key_points.map(point => `<li>${point}</li>`).join('')}
+                                </ul>
+                                ${step.links ? 
+                                    `<div class="mt-2">
+                                        ${step.links.map(link => 
+                                            `<a href="${link}" target="_blank" class="text-blue-600 hover:underline block">${link}</a>`
+                                        ).join('')}
+                                    </div>` 
+                                    : ''
+                                }
+                            </li>`;
+                    });
+                    formattedContent += '</ul>';
+                } else if (endpoint === 'essential-links') {
+                    formattedContent = '<h3 class="font-bold mb-2">Essential Resources:</h3><div class="space-y-2">';
+                    for (const [key, value] of Object.entries(data.links)) {
+                        const formattedKey = key.split('_').map(word => 
+                            word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ');
+                        formattedContent += `
+                            <div class="bg-gray-50 p-3 rounded">
+                                <div class="font-medium">${formattedKey}</div>
+                                <a href="${value}" target="_blank" class="text-blue-600 hover:underline text-sm">${value}</a>
+                            </div>`;
+                    }
+                    formattedContent += '</div>';
+                }
+                
+                appendMessage('bot', formattedContent);
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('error', 'Sorry, there was an error fetching the information.');
+            }
+        }
+
+        async function fetchMinimumWage(location) {
+            try {
+                const response = await fetch(`/api/minimum-wage/${location}`);
+                const data = await response.json();
+                
+                const locationName = location.charAt(0).toUpperCase() + location.slice(1);
+                const formattedContent = `
+                    <div class="bg-green-50 p-4 rounded">
+                        <h3 class="font-bold mb-2">Minimum Wage in ${locationName}:</h3>
+                        <div class="text-2xl font-semibold text-green-700">$${data.minimum_wage.toFixed(2)}/hour</div>
+                    </div>`;
+                
+                appendMessage('bot', formattedContent);
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('error', 'Sorry, there was an error fetching the minimum wage information.');
+            }
+        }
+
+        function showLocationPrompt() {
+            locationModal.classList.remove('hidden');
+            locationInput.focus();
+        }
+
+        function closeLocationPrompt() {
+            locationModal.classList.add('hidden');
+            locationInput.value = '';
+        }
+
+        function submitLocation() {
+            const location = locationInput.value.trim();
+            if (location) {
+                fetchMinimumWage(location);
+                closeLocationPrompt();
+            }
+        }
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            appendMessage('user', message);
+            userInput.value = '';
+
+            try {
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: message })
+                });
+
+                const data = await response.json();
+                
+                // Format the bot's response text
+                let formattedText = data.text;
+                
+                // Check if the text contains bullet points
+                if (formattedText.includes('•')) {
+                    // Split into introduction and bullet points
+                    const [intro, ...bulletPoints] = formattedText.split('•').map(text => text.trim());
+                    
+                    // Filter out empty bullet points and clean up the text
+                    const cleanedBulletPoints = bulletPoints
+                        .filter(point => point && point.length > 0)
+                        .map(point => point.trim());
+                    
+                    formattedText = `
+                        <div class="space-y-4">
+                            ${intro ? `<p class="text-gray-800">${intro}</p>` : ''}
+                            <div class="space-y-2">
+                                ${cleanedBulletPoints.map(point => `
+                                    <div class="flex items-start">
+                                        <span class="text-blue-600 mr-2 flex-shrink-0">•</span>
+                                        <span class="text-gray-700">${point}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                // Check if the text contains numbered points
+                else if (formattedText.includes('1.')) {
+                    // Split the text into introduction and list
+                    const parts = formattedText.split(/(?=1\.)/);
+                    const intro = parts[0].trim();
+                    const listContent = parts[1];
+
+                    // Split the list content into individual points
+                    const points = listContent.split(/(?=\d+\.)/);
+                    
+                    formattedText = `
+                        <div class="space-y-4">
+                            ${intro ? `<p class="text-gray-800 mb-4">${intro}</p>` : ''}
+                            <div class="space-y-6">
+                                ${points.map(point => {
+                                    // Extract number and content
+                                    const match = point.match(/(\d+)\.([\s\S]*)/);
+                                    if (!match) return '';
+                                    const [_, number, content] = match;
+                                    
+                                    return `
+                                        <div class="flex items-start gap-4">
+                                            <div class="flex-shrink-0 font-semibold text-blue-800 w-6">
+                                                ${number}.
+                                            </div>
+                                            <div class="flex-1 text-gray-700">
+                                                ${content.trim()}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                            ${formattedText.split('\n\n').slice(-1)[0].trim().startsWith('1.') ? '' : 
+                                `<p class="text-gray-800 mt-4">${formattedText.split('\n\n').slice(-1)[0]}</p>`}
+                        </div>
+                    `;
+                } else {
+                    // For non-numbered responses, add paragraph formatting
+                    formattedText = `<div class="space-y-4">${
+                        formattedText.split('\n\n').map(para => 
+                            `<p class="text-gray-800">${para.trim()}</p>`
+                        ).join('')
+                    }</div>`;
+                }
+                
+                // Replace markdown-style links with HTML links
+                formattedText = formattedText.replace(
+                    /\[([^\]]+)\]\(([^)]+)\)/g, 
+                    '<a href="$2" target="_blank" class="text-blue-600 hover:underline">$1</a>'
+                );
+                
+                // Replace markdown-style bold with HTML bold
+                formattedText = formattedText.replace(
+                    /\*\*([^*]+)\*\*/g,
+                    '<strong class="text-gray-800">$1</strong>'
+                );
+
+                appendMessage('bot', formattedText);
+
+                if (data.data) {
+                    let content = '';
+                    if (Array.isArray(data.data.content)) {
+                        content = '<div class="space-y-2 mt-2">' + 
+                                data.data.content.map(item => 
+                                    `<div class="flex items-start">
+                                        <span class="text-blue-600 mr-2">•</span>
+                                        <span>${item}</span>
+                                     </div>`
+                                ).join('') + 
+                                '</div>';
+                    } else {
+                        content = `<div class="mt-2 text-gray-700">${data.data.content}</div>`;
+                    }
+                    appendMessage('bot-data', content);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('error', 'Sorry, there was an error processing your request.');
+            }
+        }
+
+        function appendMessage(type, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `p-4 rounded-lg ${getMessageClass(type)}`;
+            
+            // Add a visual indicator for bot messages
+            if (type === 'bot') {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'flex items-start space-x-3';
+                
+                const icon = document.createElement('div');
+                icon.className = 'flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center';
+                icon.innerHTML = '🤖';
+                
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'flex-1';
+                contentDiv.innerHTML = content;
+                
+                wrapper.appendChild(icon);
+                wrapper.appendChild(contentDiv);
+                messageDiv.appendChild(wrapper);
+            } else {
+                messageDiv.innerHTML = content;
+            }
+            
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function getMessageClass(type) {
+            switch(type) {
+                case 'user':
+                    return 'bg-blue-100 text-blue-800';
+                case 'bot':
+                    return 'bg-white border border-gray-200 shadow-sm';
+                case 'bot-data':
+                    return 'bg-gray-50 ml-4 border border-gray-100';
+                case 'error':
+                    return 'bg-red-50 text-red-800 border border-red-100';
+                default:
+                    return '';
+            }
+        }
+
+        // Handle Enter key in input fields
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        locationInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitLocation();
+            }
+        });
+    </script>
+</body>
+</html> 

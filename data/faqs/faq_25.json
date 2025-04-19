@@ -1,0 +1,22 @@
+{
+  "id": "faq_25",
+  "question": "Where can I search for information on a business or corporation?",
+  "answer": "To look up a business license, tax account, or reseller permit with the Department of Revenue visit: https://secure.dor.wa.gov/gteunauth/_/#1\nTo verify a corporate entity registration (i.e. Corporation, LLC, etc.) with the Secretary of State visit: https://www.sos.wa.gov/corps/  \nTo verify the status of a contractor or tradesperson (i.e. Electrician, Plumber, etc.) with the Department of Labor & Industries, visit: https://secure.lni.wa.gov/verify/",
+  "links": [
+    {
+      "text": "https://secure.dor.wa.gov/gteunauth/_/#1",
+      "value": "https://secure.dor.wa.gov/gteunauth/_/#1",
+      "type": "url"
+    },
+    {
+      "text": "https://www.sos.wa.gov/corps/",
+      "value": "https://www.sos.wa.gov/corps/",
+      "type": "url"
+    },
+    {
+      "text": "https://secure.lni.wa.gov/verify/",
+      "value": "https://secure.lni.wa.gov/verify/",
+      "type": "url"
+    }
+  ]
+}

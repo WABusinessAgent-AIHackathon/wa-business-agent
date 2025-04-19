@@ -1,0 +1,12 @@
+{
+  "id": "faq_4",
+  "question": "Do I need a Federal Employer Identification Number (EIN)?",
+  "answer": "Sole Proprietorship who do not have employees usually do not need to apply for a Federal Employer Identification Number (EIN); however, corporate entities (LLC, Corporation, etc.) must apply for this registration whether they have employees or not.\nFor more information, visit: https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers",
+  "links": [
+    {
+      "text": "https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers",
+      "value": "https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers",
+      "type": "url"
+    }
+  ]
+}

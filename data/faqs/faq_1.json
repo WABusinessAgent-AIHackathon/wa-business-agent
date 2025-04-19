@@ -1,0 +1,17 @@
+{
+  "id": "faq_1",
+  "question": "Am I required to get business insurance?",
+  "answer": "Business insurance, also known as Commercial General Liability insurance, protects against third-party bodily injury and property damage claims arising from your premises or operations.  This type of insurance includes coverage for Personal Injury, Products/Completed Operations, Fire Legal Liability, and Medical Payments.  Business insurance is not required as a general rule;  however, it is recommended for non-corporate entity business structures such as Sole Proprietorships because it can provide the same protection against lawsuits as a Corporation or LLC.  It also protects owners from losses due to bodily or property damages.\nNote: one exception to this rule is if you are registered as a general or specialty contractor with the Department of Labor & Industries. Visit: https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/ for more details.\nIf you have questions about business insurance, you should speak with a licensed insurance professional or insurance company regarding your coverage for your business, or visit https://www.insurance.wa.gov/learn-how-business-insurance-works.",
+  "links": [
+    {
+      "text": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "value": "https://lni.wa.gov/licensing-permits/contractors/register-as-a-contractor/",
+      "type": "url"
+    },
+    {
+      "text": "https://www.insurance.wa.gov/learn-how-business-insurance-works",
+      "value": "https://www.insurance.wa.gov/learn-how-business-insurance-works",
+      "type": "url"
+    }
+  ]
+}

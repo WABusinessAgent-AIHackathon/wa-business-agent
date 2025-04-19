@@ -1,0 +1,27 @@
+{
+  "id": "faq_20",
+  "question": "What are the payroll taxes in Washington state?",
+  "answer": "There are three employee-related taxes in Washington State:\n\nWorkers’ Compensation:  https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/\nUnemployment Insurance: https://esd.wa.gov/employer-taxes\nPaid Family Medical Leave:  https://esd.wa.gov/paid-family-medical-leave/smallbusiness\n\nFor a table summary of employer payroll & tax responsibilities, visit: https://www.business.wa.gov/site/alias__business/878/Small-Business-Guide—Payroll.aspx#Responsibilities",
+  "links": [
+    {
+      "text": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/",
+      "value": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/",
+      "type": "url"
+    },
+    {
+      "text": "https://esd.wa.gov/employer-taxes",
+      "value": "https://esd.wa.gov/employer-taxes",
+      "type": "url"
+    },
+    {
+      "text": "https://esd.wa.gov/paid-family-medical-leave/smallbusiness",
+      "value": "https://esd.wa.gov/paid-family-medical-leave/smallbusiness",
+      "type": "url"
+    },
+    {
+      "text": "https://www.business.wa.gov/site/alias__business/878/Small-Business-Guide—Payroll.aspx#Responsibilities",
+      "value": "https://www.business.wa.gov/site/alias__business/878/Small-Business-Guide--Payroll.aspx#Responsibilities",
+      "type": "url"
+    }
+  ]
+}

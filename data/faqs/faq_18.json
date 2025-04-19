@@ -1,0 +1,22 @@
+{
+  "id": "faq_18",
+  "question": "Is Workers' Compensation required for business owners?",
+  "answer": "Generally business owners, and corporate officers, are exempt from mandatory coverage of Workers’ Compensation; however, there are options for those who would like to elect for coverage from the Department of Labor & Industries.\n\nFor Corporations, visit: https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/corporate-officers#non-public-corporations\n\n\nFor Limited Liability Companies, visit: https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/llc-members\n\n\nFor Business Owner coverage, visit: https://lni.wa.gov/insurance/insurance-requirements/how-to-get-a-workers-compensation-account/#owner-officer-and-exempt-employments-coverage\n\nIf you have additional questions on Workers’ Compensation, contact the Department of Labor & Industries, Employer Services at 360-902-4817.",
+  "links": [
+    {
+      "text": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/corporate-officers#non-public-corporations",
+      "value": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/corporate-officers#non-public-corporations",
+      "type": "url"
+    },
+    {
+      "text": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/llc-members",
+      "value": "https://lni.wa.gov/insurance/insurance-requirements/do-i-need-a-workers-comp-account/llc-members",
+      "type": "url"
+    },
+    {
+      "text": "https://lni.wa.gov/insurance/insurance-requirements/how-to-get-a-workers-compensation-account/#owner-officer-and-exempt-employments-coverage",
+      "value": "https://lni.wa.gov/insurance/insurance-requirements/how-to-get-a-workers-compensation-account/#owner-officer-and-exempt-employments-coverage",
+      "type": "url"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "faq_7",
+  "question": "How do I get paid if I have a contract with the state?",
+  "answer": "Setting up vendor/payee payment registration - There are two ways to get paid by the state:  The Office of Financial Management (OFM) pays vendors via check or Electronic Funds Transfer (EFT).\nOFM has information for vendors about the payment process and how to get help. Businesses can also accept payment through a state credit card, called a purchase card. They work the same as any credit card.\nFor complete information on how to do business with the state, visit https://des.wa.gov/sell/how-work-state.",
+  "links": [
+    {
+      "text": "Setting up vendor/payee payment registration",
+      "value": "https://ofm.wa.gov/it-systems/accounting-systems/statewide-vendorpayee-services",
+      "type": "url"
+    },
+    {
+      "text": "information for vendors",
+      "value": "https://ofm.wa.gov/it-systems/accounting-systems/statewide-vendorpayee-services",
+      "type": "url"
+    },
+    {
+      "text": "https://des.wa.gov/sell/how-work-state",
+      "value": "https://des.wa.gov/sell/how-work-state",
+      "type": "url"
+    }
+  ]
+}

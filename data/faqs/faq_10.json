@@ -1,0 +1,42 @@
+{
+  "id": "faq_10",
+  "question": "How do I set up my business as a corporate entity (LLC, Corporation, etc.)?",
+  "answer": "To set up your business as a corporate entity (LLC, Corporation, etc.):\n\nRegister your business with the Secretary of State (SOS) through the Corporations and Charities Filing System: https://ccfs.sos.wa.gov/#/ to set up your business structure and receive your Unified Business Identifier (UBI) number. For a listing of SOS forms, visit https://www.sos.wa.gov/corps/forms.aspx.\n\nFor questions on the registration process or forms, contact the Secretary of State at 360-725-0377 or corps@sos.wa.gov.\n\nApply for a Federal Tax Identification Number, also known as the Employer Identification Number (EIN).  For more information and to apply online, visit: https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers.\n\n\nFile a Washington State Business License with the Business Licensing Service using your UBI number through the myDOR system: https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license to set up your business tax account.\n\nWe recommend using the Business Licensing Wizard, located at: http://secure.dor.wa.gov/gteauth/?Link=wiz for information on any other licenses or permits that may be required based on the location and type of business.\nFor questions on the business license application or wizard, contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov.",
+  "links": [
+    {
+      "text": "https://ccfs.sos.wa.gov/#/",
+      "value": "https://ccfs.sos.wa.gov/#/",
+      "type": "url"
+    },
+    {
+      "text": "https://www.sos.wa.gov/corps/forms.aspx",
+      "value": "https://www.sos.wa.gov/corps/forms.aspx",
+      "type": "url"
+    },
+    {
+      "text": "corps@sos.wa.gov",
+      "value": "mailto:corps@sos.wa.gov",
+      "type": "email"
+    },
+    {
+      "text": "https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers",
+      "value": "https://www.irs.gov/businesses/small-businesses-self-employed/employer-id-numbers",
+      "type": "url"
+    },
+    {
+      "text": "https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license",
+      "value": "https://dor.wa.gov/manage-business/my-dor-help/business-licensing/apply-new-business-license",
+      "type": "url"
+    },
+    {
+      "text": "http://secure.dor.wa.gov/gteauth/?Link=wiz",
+      "value": "http://secure.dor.wa.gov/gteauth/?Link=wiz",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    }
+  ]
+}

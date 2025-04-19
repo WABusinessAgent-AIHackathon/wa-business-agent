@@ -1,0 +1,17 @@
+{
+  "id": "faq_22",
+  "question": "What is a UBI number?",
+  "answer": "A UBI number (or Unified Business Identifier) is a nine-digit number that registers you with several state agencies and allows you to do business in Washington State. A UBI number is sometimes called a tax registration number, a business registration number, a business license number or a master business license number.\nFor more information, visit: https://dor.wa.gov/open-business/business-licensing-and-renewals-faqs#UBI and contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov with additional questions",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/open-business/business-licensing-and-renewals-faqs#UBI",
+      "value": "https://dor.wa.gov/open-business/business-licensing-and-renewals-faqs#UBI",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "faq_6",
+  "question": "How do I file my Washington state taxes online?",
+  "answer": "To file your Washington state taxes online, sign into myDOR at: https://secure.dor.wa.gov/home/. \nFor a step-by-step guide to filing your taxes using myDOR, visit: https://dor.wa.gov/manage-business/my-dor-help/business-taxes and contact the Department of Revenue at 360-705-6705 with additional questions or further assistance.",
+  "links": [
+    {
+      "text": "https://secure.dor.wa.gov/home/",
+      "value": "https://secure.dor.wa.gov/home/",
+      "type": "url"
+    },
+    {
+      "text": "https://dor.wa.gov/manage-business/my-dor-help/business-taxes",
+      "value": "https://dor.wa.gov/manage-business/my-dor-help/business-taxes",
+      "type": "url"
+    }
+  ]
+}

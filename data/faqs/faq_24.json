@@ -1,0 +1,17 @@
+{
+  "id": "faq_24",
+  "question": "Where can I find rules around employer responsibilities and workers rights?",
+  "answer": "You can find information about employer responsibilities and employee rights, by visiting: https://lni.wa.gov/workers-rights/ and contacting the Department of Labor & Industries, Employment Standards Office at 360-902-5316 or esgeneral@lni.wa.gov with additional questions.",
+  "links": [
+    {
+      "text": "https://lni.wa.gov/workers-rights/",
+      "value": "https://lni.wa.gov/workers-rights/",
+      "type": "url"
+    },
+    {
+      "text": "esgeneral@lni.wa.gov",
+      "value": "mailto:esgeneral@lni.wa.gov",
+      "type": "email"
+    }
+  ]
+}

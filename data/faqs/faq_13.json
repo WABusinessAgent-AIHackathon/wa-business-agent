@@ -1,0 +1,27 @@
+{
+  "id": "faq_13",
+  "question": "How do I set up payroll accounts as a Washington employer?",
+  "answer": "To set up employee accounts in Washington, file or refile your Washington State Business license with the Business Licensing Service.\nYour business information will be automatically forwarded to the Department of Labor & Industries and Employment Security Department to set up your Workers Compensation and Unemployment Insurance.\nFor more information, visit: https://dor.wa.gov/manage-business/grow-business/hiring-employees and contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov with additional questions.\nNote: Nearly all employers in the State of Washington have responsibilities under the Paid Family and Medical Leave Program.  For more information, visit: http://paidleave.wa.gov/employers or contact the Employment Security Department at 833-171-2273 or paidleave@esd.wa.gov.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/manage-business/grow-business/hiring-employees",
+      "value": "https://dor.wa.gov/manage-business/grow-business/hiring-employees",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    },
+    {
+      "text": "http://paidleave.wa.gov/employers",
+      "value": "http://paidleave.wa.gov/employers",
+      "type": "url"
+    },
+    {
+      "text": "paidleave@esd.wa.gov",
+      "value": "mailto:paidleave@esd.wa.gov",
+      "type": "email"
+    }
+  ]
+}

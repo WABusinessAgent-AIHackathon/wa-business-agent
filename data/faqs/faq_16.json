@@ -1,0 +1,12 @@
+{
+  "id": "faq_16",
+  "question": "I didn't have any business activity this year, do I still need to file taxes?",
+  "answer": "Yes, you must still file a tax return by following one of the options listed at: https://dor.wa.gov/file-pay-taxes/report-no-business-activity.\nFor additional tax-related questions, contact the Department of Revenue at 360-705-6705",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/file-pay-taxes/report-no-business-activity",
+      "value": "https://dor.wa.gov/file-pay-taxes/report-no-business-activity",
+      "type": "url"
+    }
+  ]
+}

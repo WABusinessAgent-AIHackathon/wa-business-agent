@@ -1,0 +1,130 @@
+{
+  "resource_links": [
+    {
+      "id": "assistance_tools",
+      "title": "Assistance Tools",
+      "url": "https://www.business.wa.gov/site/alias__business/875/Home.aspx#anchor-3573",
+      "aria_label": "Assistance Tools",
+      "category": "tools"
+    },
+    {
+      "id": "small_business_liaison",
+      "title": "Small Business Liaison Team",
+      "url": "https://www.business.wa.gov/site/alias__business/960/Small-Business-Liaison-Team.aspx#sblt-contact-list",
+      "aria_label": "Small Business Liaison Team",
+      "category": "guidance"
+    },
+    {
+      "id": "checklist_opening",
+      "title": "Checklist for Opening",
+      "url": "https://www.business.wa.gov/site/alias__business/1582/checklist-opening-a-business.aspx",
+      "aria_label": "Checklist for Opening",
+      "category": "planning"
+    },
+    {
+      "id": "small_business_guide",
+      "title": "Small Business Guide",
+      "url": "https://www.business.wa.gov/site/alias__business/875/Home.aspx#anchor-3574",
+      "aria_label": "Small Business Guide",
+      "category": "guidance"
+    },
+    {
+      "id": "frequently_asked_questions",
+      "title": "Frequently Asked Questions",
+      "url": "https://www.business.wa.gov/site/alias__business/875/Home.aspx#anchor-6301",
+      "aria_label": "Frequently Asked Questions",
+      "category": "guidance"
+    },
+    {
+      "id": "contact_us",
+      "title": "Still Have Questions?",
+      "url": "https://www.business.wa.gov/site/alias__business/961/Contact-Us.aspx",
+      "aria_label": "Still Have Questions?",
+      "category": "guidance"
+    },
+    {
+      "id": "research_service",
+      "title": "We'll Do the Research",
+      "url": "https://www.business.wa.gov/site/alias__business/875/Home.aspx#anchor-3575",
+      "aria_label": "We'll Do the Research",
+      "category": "guidance"
+    },
+    {
+      "id": "payroll_calculators",
+      "title": "Payroll Calculators",
+      "url": "https://www.business.wa.gov/site/alias__business/878/Small-Business-Guide--Payroll.aspx#PayrollCalculators",
+      "aria_label": "Payroll Calculators",
+      "category": "tools"
+    },
+    {
+      "id": "starting_business",
+      "title": "Starting a Business",
+      "url": "https://www.business.wa.gov/site/alias__business/876/Small-Business-Guide--Start.aspx",
+      "aria_label": "Starting a Business",
+      "category": "planning"
+    },
+    {
+      "id": "planning_business",
+      "title": "Planning a Business",
+      "url": "https://www.business.wa.gov/site/alias__business/877/Small-Business-Guide--Plan.aspx",
+      "aria_label": "Planning a Business",
+      "category": "planning"
+    },
+    {
+      "id": "corporate_registration",
+      "title": "Corporate / Entity Registration",
+      "url": "https://ccfs.sos.wa.gov/#/",
+      "aria_label": "Corporate / Entity Registration",
+      "category": "licensing"
+    },
+    {
+      "id": "spa_salon_permit",
+      "title": "Spa / Salon Permit",
+      "url": "https://www.oria.wa.gov/site/alias__oria/mid__12357/403/handbook-entry?ItemID=259",
+      "aria_label": "Spa / Salon Permit",
+      "category": "licensing"
+    },
+    {
+      "id": "business_license_wizard",
+      "title": "Business License Wizard",
+      "url": "https://secure.dor.wa.gov/gteunauth/?Link=wiz",
+      "aria_label": "Business License Wizard",
+      "category": "licensing"
+    },
+    {
+      "id": "reseller_permit",
+      "title": "Reseller Permit",
+      "url": "https://www.oria.wa.gov/site/alias__oria/mid__12357/403/handbook-entry?ItemID=202",
+      "aria_label": "Reseller Permit",
+      "category": "licensing"
+    },
+    {
+      "id": "liquor_license",
+      "title": "Liquor License",
+      "url": "https://lcb.wa.gov/licensing/apply-liquor-license",
+      "aria_label": "Liquor License",
+      "category": "licensing"
+    },
+    {
+      "id": "marijuana_license",
+      "title": "Marijuana License",
+      "url": "https://lcb.wa.gov/cannabis-license/cannabis-licensing",
+      "aria_label": "Marijuana License",
+      "category": "licensing"
+    },
+    {
+      "id": "business_license_service",
+      "title": "Business License Service",
+      "url": "https://dor.wa.gov/open-business",
+      "aria_label": "Business License Service",
+      "category": "licensing"
+    },
+    {
+      "id": "common_carrier_permit",
+      "title": "Common Carrier Permit",
+      "url": "https://www.oria.wa.gov/site/alias__oria/mid__12357/403/handbook-entry?ItemID=190",
+      "aria_label": "Common Carrier Permit",
+      "category": "licensing"
+    }
+  ]
+} 

@@ -1,0 +1,17 @@
+{
+  "id": "faq_12",
+  "question": "How do I set up my SAW User ID?",
+  "answer": "To set up a Secure Access Washington (SAW) account for use on myDOR visit: https://secure.dor.wa.gov/home/Account/Register\nFor additional information on SAW user accounts, visit: https://dor.wa.gov/manage-business/my-dor-help/get-started#SAW and contact the Department of Revenue at 360-705-6705 with additional questions.",
+  "links": [
+    {
+      "text": "https://secure.dor.wa.gov/home/Account/Register",
+      "value": "https://secure.dor.wa.gov/home/Account/Register",
+      "type": "url"
+    },
+    {
+      "text": "https://dor.wa.gov/manage-business/my-dor-help/get-started#SAW",
+      "value": "https://dor.wa.gov/manage-business/my-dor-help/get-started#SAW",
+      "type": "url"
+    }
+  ]
+}

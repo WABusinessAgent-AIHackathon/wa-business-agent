@@ -1,0 +1,17 @@
+{
+  "id": "faq_2",
+  "question": "Can a Sole Proprietorship change to a business entity such as an LLC?",
+  "answer": "To change your business structure from a non-corporate entity such as a Sole Proprietorship to a corporate entity (i.e. LLC, Corporation, etc.) and vise versa, you will need to start from scratch and receive a new UBI number by opening a new business following the steps listed at https://dor.wa.gov/manage-business/grow-business/change-your-business-structure.\nFor questions on the process, contact the Business Licensing Service at 360-705-6741 or bls@dor.wa.gov.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/manage-business/grow-business/change-your-business-structure",
+      "value": "https://dor.wa.gov/manage-business/grow-business/change-your-business-structure",
+      "type": "url"
+    },
+    {
+      "text": "bls@dor.wa.gov",
+      "value": "mailto:bls@dor.wa.gov",
+      "type": "email"
+    }
+  ]
+}

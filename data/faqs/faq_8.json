@@ -1,0 +1,12 @@
+{
+  "id": "faq_8",
+  "question": "How do I renew my business license?",
+  "answer": "All businesses must renew any issued city and state endorsements to remain active.  Additionally, corporate entities (LLC, Corporations, etc.) require an Annual Report to be filed with the Secretary of State.  \nYou can find more information about filing an Annual Report, re-opening a business account, or renewing city and state endorsements, by visiting: https://dor.wa.gov/manage-business/run-business/renew-your-business-license.",
+  "links": [
+    {
+      "text": "https://dor.wa.gov/manage-business/run-business/renew-your-business-license",
+      "value": "https://dor.wa.gov/manage-business/run-business/renew-your-business-license",
+      "type": "url"
+    }
+  ]
+}

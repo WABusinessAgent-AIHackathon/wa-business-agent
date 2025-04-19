@@ -1,0 +1,17 @@
+{
+  "id": "faq_19",
+  "question": "What are my employer requirements under the Paid Family and Medical Leave benefit program?",
+  "answer": "As a Washington employer, you are required to report your employees’ wages and hours and submit premiums every quarter—unless you had no payroll expenses during that quarter.  While businesses with fewer than 50 employees do not have to contribute to their employees’ premiums, you play a role in the program.  Find out more at paidleave.wa.gov or contact the Washington Employment Security Department at (833) 717-2273 or email paidleave@esd.wa.gov.",
+  "links": [
+    {
+      "text": "paidleave.wa.gov",
+      "value": "http://www.paidleave.wa.gov/",
+      "type": "url"
+    },
+    {
+      "text": "paidleave@esd.wa.gov",
+      "value": "mailto:paidleave@esd.wa.gov",
+      "type": "email"
+    }
+  ]
+}

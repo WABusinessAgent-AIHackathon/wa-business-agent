@@ -1,0 +1,32 @@
+{
+  "id": "faq_23",
+  "question": "What is Washington's minimum wage?",
+  "answer": "The 2024 minimum wage in the state of Washington is $16.28 per hour. Washington employers must pay most employees at least the minimum wage for every hour worked. \nSome local jurisdictions have higher minimum wage rates and different labor rules than Washington state. The more generous minimum wage may apply in these localities:\n\nSeattle: $19.97/hr.\nSeaTac: $19.71/hr.\nTukwila:  $20.29/hr.\n\nVisit https://lni.wa.gov/workers-rights/wages/minimum-wage/ for detailed information about pay requirements, download minimum wage announcement posters, learn about overtime, exemptions and prevailing wage rates.  Contact the Employment Standards Office at 360-902-5316 or esgeneral@lni.wa.gov for assistance.",
+  "links": [
+    {
+      "text": "Seattle",
+      "value": "https://www.seattle.gov/laborstandards/ordinances/minimum-wage",
+      "type": "url"
+    },
+    {
+      "text": "SeaTac",
+      "value": "https://www.seatacwa.gov/our-city/employment-standards-ordinance",
+      "type": "url"
+    },
+    {
+      "text": "Tukwila:",
+      "value": "https://www.tukwilawa.gov/wp-content/uploads/2024-Tukwila-Minimum-Wage-Notice.pdf",
+      "type": "url"
+    },
+    {
+      "text": "https://lni.wa.gov/workers-rights/wages/minimum-wage/",
+      "value": "https://lni.wa.gov/workers-rights/wages/minimum-wage/",
+      "type": "url"
+    },
+    {
+      "text": "esgeneral@lni.wa.gov",
+      "value": "https://www.business.wa.gov/esgeneral@lni.wa.gov%20",
+      "type": "url"
+    }
+  ]
+}
