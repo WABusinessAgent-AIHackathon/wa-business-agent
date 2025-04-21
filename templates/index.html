@@ -5,6 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WA Business Agent</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <style>
+        .flowchart-container {
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .flowchart-controls {
+            margin-bottom: 20px;
+        }
+        
+        .flowchart-controls select, .flowchart-controls button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .flowchart-controls button:hover {
+            background: #f5f5f5;
+        }
+        
+        #formation-flowchart {
+            width: 100%;
+            min-height: 400px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -96,6 +131,20 @@
     </div>
 
     <script>
+        // Initialize Mermaid with specific configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            securityLevel: 'loose',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 50,
+                rankSpacing: 50
+            }
+        });
+
         const chatContainer = document.getElementById('chat-container');
         const userInput = document.getElementById('user-input');
         const locationModal = document.getElementById('location-modal');
@@ -338,16 +387,83 @@
                 
                 const contentDiv = document.createElement('div');
                 contentDiv.className = 'flex-1';
-                contentDiv.innerHTML = content;
                 
-                wrapper.appendChild(icon);
-                wrapper.appendChild(contentDiv);
-                messageDiv.appendChild(wrapper);
+                // Check for flow chart data
+                if (content.includes('<flow_chart_data>')) {
+                    const parts = content.split('<flow_chart_data>');
+                    const beforeChart = parts[0];
+                    const chartData = JSON.parse(parts[1].split('</flow_chart_data>')[0]);
+                    const afterChart = parts[1].split('</flow_chart_data>')[1];
+                    
+                    // Add text before chart
+                    if (beforeChart) {
+                        const beforeDiv = document.createElement('div');
+                        beforeDiv.innerHTML = beforeChart;
+                        contentDiv.appendChild(beforeDiv);
+                    }
+                    
+                    // Add flow chart
+                    const chartDiv = document.createElement('div');
+                    chartDiv.className = 'my-4 p-4 bg-white rounded-lg shadow';
+                    
+                    // Generate unique ID for the chart
+                    const chartId = 'chart-' + Date.now();
+                    
+                    // Add chart container with pre tag
+                    const pre = document.createElement('pre');
+                    pre.className = 'mermaid';
+                    pre.style.minHeight = '400px';
+                    pre.style.background = 'none';
+                    
+                    // Generate Mermaid syntax
+                    let mermaidSyntax = 'flowchart TD\n';
+                    
+                    // Add nodes with escaped text
+                    chartData.nodes.forEach(node => {
+                        const escapedText = node.text
+                            .replace(/[<>]/g, '')  // Remove angle brackets
+                            .replace(/"/g, "'");    // Replace double quotes with single quotes
+                        mermaidSyntax += `    ${node.id}["${escapedText}"]\n`;
+                        if (node.style) {
+                            mermaidSyntax += `    style ${node.id} ${node.style}\n`;
+                        }
+                    });
+                    
+                    // Add edges
+                    chartData.edges.forEach(([from, to]) => {
+                        mermaidSyntax += `    ${from} --> ${to}\n`;
+                    });
+                    
+                    pre.textContent = mermaidSyntax;
+                    chartDiv.appendChild(pre);
+                    contentDiv.appendChild(chartDiv);
+                    
+                    // Add text after chart
+                    if (afterChart) {
+                        const afterDiv = document.createElement('div');
+                        afterDiv.innerHTML = afterChart;
+                        contentDiv.appendChild(afterDiv);
+                    }
+                    
+                    wrapper.appendChild(icon);
+                    wrapper.appendChild(contentDiv);
+                    messageDiv.appendChild(wrapper);
+                    chatContainer.appendChild(messageDiv);
+                    
+                    // Re-initialize Mermaid for this diagram
+                    mermaid.init(undefined, pre);
+                } else {
+                    contentDiv.innerHTML = content;
+                    wrapper.appendChild(icon);
+                    wrapper.appendChild(contentDiv);
+                    messageDiv.appendChild(wrapper);
+                    chatContainer.appendChild(messageDiv);
+                }
             } else {
                 messageDiv.innerHTML = content;
+                chatContainer.appendChild(messageDiv);
             }
             
-            chatContainer.appendChild(messageDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 

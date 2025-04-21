@@ -15,6 +15,8 @@ from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import re
 import logging
+from pathlib import Path
+import json
 
 # Configure logging
 logging.basicConfig(
@@ -145,6 +147,18 @@ async def get_essential_links():
         return {"links": links}
     except Exception as e:
         logger.error(f"Error getting essential links: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/formation-flow/{business_type}")
+async def get_formation_flow(business_type: str) -> Dict:
+    """Get the formation flow chart data for a specific business type."""
+    try:
+        logger.info(f"Generating formation flow for business type: {business_type}")
+        flow_data = await agent.generate_formation_flow(business_type)
+        logger.debug(f"Generated flow data: {flow_data}")
+        return flow_data
+    except Exception as e:
+        logger.error(f"Error generating formation flow: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
