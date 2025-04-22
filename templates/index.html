@@ -390,10 +390,13 @@
                 
                 // Check for flow chart data
                 if (content.includes('<flow_chart_data>')) {
+                    console.log("Flow chart data detected in response");
                     const parts = content.split('<flow_chart_data>');
                     const beforeChart = parts[0];
                     const chartData = JSON.parse(parts[1].split('</flow_chart_data>')[0]);
                     const afterChart = parts[1].split('</flow_chart_data>')[1];
+                    
+                    console.log("Flow chart data:", chartData);
                     
                     // Add text before chart
                     if (beforeChart) {
@@ -434,6 +437,8 @@
                         mermaidSyntax += `    ${from} --> ${to}\n`;
                     });
                     
+                    console.log("Generated Mermaid syntax:", mermaidSyntax);
+                    
                     pre.textContent = mermaidSyntax;
                     chartDiv.appendChild(pre);
                     contentDiv.appendChild(chartDiv);
@@ -451,7 +456,12 @@
                     chatContainer.appendChild(messageDiv);
                     
                     // Re-initialize Mermaid for this diagram
-                    mermaid.init(undefined, pre);
+                    try {
+                        mermaid.init(undefined, pre);
+                        console.log("Mermaid initialization successful");
+                    } catch (error) {
+                        console.error("Error initializing Mermaid:", error);
+                    }
                 } else {
                     contentDiv.innerHTML = content;
                     wrapper.appendChild(icon);

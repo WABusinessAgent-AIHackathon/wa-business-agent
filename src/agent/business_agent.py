@@ -120,6 +120,87 @@ class BusinessAgent:
         
         return content
 
+    async def _analyze_query_with_llm(self, query: str) -> Dict[str, Any]:
+        """Analyze the query using LLM to determine intent and business type."""
+        # Force flow chart generation if the query contains 'flow chart' or 'flowchart'
+        if 'flow chart' in query.lower() or 'flowchart' in query.lower():
+            # Try to extract business type from the query
+            business_types = {
+                "hair salon": ["hair", "salon", "barber", "beauty"],
+                "food truck": ["food", "truck", "cart", "vendor", "mobile"],
+                "rideshare": ["rideshare", "uber", "lyft", "taxi", "driver"],
+                "restaurant": ["restaurant", "cafe", "dining", "food service"],
+                "retail": ["retail", "store", "shop", "boutique"],
+                "online": ["online", "ecommerce", "web", "internet"],
+                "construction": ["construction", "contractor", "building"],
+                "consulting": ["consulting", "freelance", "professional service"]
+            }
+            
+            for business_type, keywords in business_types.items():
+                if any(keyword in query.lower() for keyword in keywords):
+                    return {"needs_flow_chart": True, "business_type": business_type, "confidence": 1.0}
+            
+            # Check conversation history for business type if not found in current query
+            if self.conversation_history:
+                for msg in reversed(self.conversation_history):
+                    if msg["role"] == "user":
+                        for business_type, keywords in business_types.items():
+                            if any(keyword in msg["content"].lower() for keyword in keywords):
+                                return {"needs_flow_chart": True, "business_type": business_type, "confidence": 0.8}
+            
+            return {"needs_flow_chart": True, "business_type": None, "confidence": 1.0}
+        
+        system_prompt = """You are a business analysis assistant. Analyze the given query and determine:
+1. If the user is requesting a flow chart or step-by-step process
+2. What type of business they're interested in (if any)
+
+The system CAN generate flow charts, so if the user asks for a flow chart, diagram, or steps, set needs_flow_chart to true.
+Even if they don't explicitly mention a business type, if the context suggests they want business formation steps, set needs_flow_chart to true.
+
+Respond in JSON format with the following structure:
+{
+    "needs_flow_chart": boolean,
+    "business_type": string or null,
+    "confidence": float (0-1)
+}
+
+Examples of flow chart requests:
+- "Can you generate a flow chart for me?" -> needs_flow_chart: true
+- "Show me the steps to start a business" -> needs_flow_chart: true
+- "How do I start a restaurant?" -> needs_flow_chart: true, business_type: "restaurant"
+- "What's the process for becoming an Uber driver?" -> needs_flow_chart: true, business_type: "rideshare"
+- "I want a flow chart for a hair salon" -> needs_flow_chart: true, business_type: "hair salon"
+
+If no specific business type is mentioned, set business_type to null.
+If the query is ambiguous about needing a flow chart, set needs_flow_chart to false.
+"""
+
+        # Include conversation history in the messages
+        messages = [
+            {"role": "system", "content": system_prompt}
+        ]
+        
+        # Add conversation history (up to 3 previous exchanges)
+        history_to_include = self.conversation_history[-6:] if len(self.conversation_history) > 6 else self.conversation_history
+        messages.extend(history_to_include)
+        
+        # Add the current query
+        messages.append({"role": "user", "content": query})
+
+        try:
+            response = await self.client.chat.completions.create(
+                model="gpt-4",  # or your specific model
+                messages=messages,
+                temperature=0.1,  # Low temperature for more consistent results
+                response_format={ "type": "json_object" }
+            )
+            
+            result = json.loads(response.choices[0].message.content)
+            return result
+        except Exception as e:
+            logger.error(f"Error in LLM query analysis: {str(e)}")
+            return {"needs_flow_chart": False, "business_type": None, "confidence": 0.0}
+
     async def get_business_advice(self, query: str) -> str:
         try:
             # Update conversation history
@@ -142,85 +223,13 @@ class BusinessAgent:
                 self.conversation_history.append({"role": "assistant", "content": greeting_response})
                 return greeting_response
 
-            # Check for flow chart requests
-            flow_chart_keywords = [
-                r"flow\s*chart",
-                r"flow\s*diagram",
-                r"process\s*diagram",
-                r"steps\s*(to|for)\s*(start|form|create|open|become|drive|work)",
-                r"how\s*to\s*(start|form|create|open|become|drive|work)",
-                r"show\s*me\s*(the\s*)?(steps|process)",
-            ]
+            # Analyze query using LLM
+            analysis = await self._analyze_query_with_llm(query)
             
-            is_flow_chart_request = any(re.search(pattern, query.lower()) for pattern in flow_chart_keywords)
-            
-            if is_flow_chart_request:
-                # Extract business type from query using more flexible pattern matching
-                query_lower = query.lower()
+            if analysis["needs_flow_chart"]:
+                business_type = analysis["business_type"]
                 
-                # Define business type patterns with synonyms and variations
-                business_patterns = {
-                    "rideshare": [
-                        r"(uber|lyft|ride.?share|ride.?hailing|taxi|driving service)",
-                        r"(become|work|drive).*(uber|lyft|ride.?share|taxi)"
-                    ],
-                    "food_truck": [
-                        r"food.?(truck|cart|vendor)",
-                        r"mobile.?food",
-                        r"street.?food"
-                    ],
-                    "retail_store": [
-                        r"retail",
-                        r"shop",
-                        r"store",
-                        r"boutique"
-                    ],
-                    "restaurant": [
-                        r"restaurant",
-                        r"cafe",
-                        r"dining",
-                        r"eatery"
-                    ],
-                    "consulting": [
-                        r"consult(ing|ant)",
-                        r"advisory",
-                        r"freelance"
-                    ],
-                    "online_business": [
-                        r"online",
-                        r"e.?commerce",
-                        r"web.?(site|store)",
-                        r"digital"
-                    ],
-                    "construction": [
-                        r"construction",
-                        r"contractor",
-                        r"builder",
-                        r"remodel"
-                    ],
-                    "salon": [
-                        r"salon",
-                        r"spa",
-                        r"beauty",
-                        r"hair",
-                        r"barber"
-                    ]
-                }
-                
-                found_type = None
-                for btype, patterns in business_patterns.items():
-                    if any(re.search(pattern, query_lower) for pattern in patterns):
-                        found_type = btype
-                        break
-                
-                # Also check for explicit business structure mentions
-                business_structures = ["llc", "corporation", "sole proprietorship", "partnership"]
-                for structure in business_structures:
-                    if structure in query_lower:
-                        found_type = structure
-                        break
-                
-                if not found_type:
+                if not business_type:
                     # Ask user to specify business type
                     response = (
                         "I can create a flow chart showing the steps to form your business. "
@@ -237,13 +246,18 @@ class BusinessAgent:
                 else:
                     # Generate flow chart
                     try:
-                        flow_data = await self.generate_formation_flow(found_type)
+                        flow_data = await self.generate_formation_flow(business_type)
+                        
+                        # Format the response with the flow chart data
                         response = (
-                            f"I've created a flow chart showing the steps to start your {found_type.replace('_', ' ')} business. "
+                            f"I've created a flow chart showing the steps to start your {business_type.replace('_', ' ')} business. "
                             "The chart shows the required steps, their order, and any tasks that can be done in parallel.\n\n"
                             "<flow_chart_data>" + json.dumps(flow_data) + "</flow_chart_data>\n\n"
                             "Would you like me to explain any specific step in more detail?"
                         )
+                        
+                        # Log the flow chart data for debugging
+                        logger.debug(f"Generated flow chart data: {json.dumps(flow_data)}")
                     except Exception as e:
                         logger.error(f"Error generating flow chart: {str(e)}")
                         response = (
@@ -253,7 +267,7 @@ class BusinessAgent:
                 
                 self.conversation_history.append({"role": "assistant", "content": response})
                 return response
-            
+
             # Get real-time content from relevant URLs
             relevant_content = await self._get_relevant_content(query)
             
@@ -450,77 +464,8 @@ class BusinessAgent:
                     {"title": "Tax Registration", "category": "financial"}
                 ]
             
-            # Get formation steps from knowledge base
-            formation_steps = await self._get_formation_steps_from_knowledge(business_type)
-            
-            # Generate nodes and edges
-            nodes = [{"id": "start", "text": "Start", "style": "fill:#f9f"}]
-            edges = []
-            last_id = "start"
-            
-            # Add business structure node
-            structure_id = "structure"
-            nodes.append({
-                "id": structure_id,
-                "text": f"{business_type.title()} Structure",
-                "style": "fill:#bbf"
-            })
-            edges.append([last_id, structure_id])
-            last_id = structure_id
-            
-            # Process each formation step
-            for idx, step in enumerate(formation_steps):
-                step_id = f"step_{idx}"
-                nodes.append({
-                    "id": step_id,
-                    "text": step["title"],
-                    "style": self._get_step_style(step["category"])
-                })
-                
-                # Connect to previous node
-                edges.append([last_id, step_id])
-                
-                # If there are parallel steps, create branches
-                if "parallel_steps" in step:
-                    for p_idx, parallel_step in enumerate(step["parallel_steps"]):
-                        p_id = f"parallel_{idx}_{p_idx}"
-                        nodes.append({
-                            "id": p_id,
-                            "text": parallel_step["title"],
-                            "style": self._get_step_style(parallel_step["category"])
-                        })
-                        edges.append([step_id, p_id])
-                
-                last_id = step_id
-            
-            return {"nodes": nodes, "edges": edges}
-            
-        except Exception as e:
-            logger.error(f"Error generating steps for {business_type}: {str(e)}")
-            logger.info("Using fallback steps")
-            
-            # Enhanced fallback steps for food service businesses
-            if "food" in business_type.lower():
-                return [
-                    {"title": "Business Registration", "category": "legal"},
-                    {"title": "Get UBI Number", "category": "administrative"},
-                    {"title": "Federal EIN", "category": "administrative"},
-                    {"title": "Business License", "category": "legal"},
-                    {"title": "Food Service Permit", "category": "compliance"},
-                    {"title": "Health Department Inspection", "category": "compliance"},
-                    {"title": "Food Handler Certification", "category": "compliance"},
-                    {
-                        "title": "Vehicle and Equipment",
-                        "category": "administrative",
-                        "parallel_steps": [
-                            {"title": "Vehicle Registration", "category": "administrative"},
-                            {"title": "Equipment Inspection", "category": "compliance"}
-                        ]
-                    }
-                ]
-            
-            # Enhanced fallback steps for retail businesses
-            elif "retail" in business_type.lower():
+            # Enhanced fallback steps for food truck businesses
+            if "food" in business_type.lower() and any(term in business_type.lower() for term in ["truck", "cart", "vendor", "mobile"]):
                 return [
                     {"title": "Choose Business Structure", "category": "legal"},
                     {"title": "Register Business Name", "category": "administrative"},
@@ -528,24 +473,98 @@ class BusinessAgent:
                     {"title": "Federal EIN", "category": "administrative"},
                     {"title": "Business License", "category": "legal"},
                     {
-                        "title": "Location and Zoning",
-                        "category": "administrative",
+                        "title": "Food Service Permits",
+                        "category": "compliance",
                         "parallel_steps": [
-                            {"title": "Check Zoning Laws", "category": "compliance"},
-                            {"title": "Secure Retail Space", "category": "administrative"}
+                            {"title": "Food Worker Card", "category": "compliance"},
+                            {"title": "Mobile Food Unit Permit", "category": "compliance"},
+                            {"title": "Health Department Inspection", "category": "compliance"}
                         ]
                     },
-                    {"title": "Retail Permits", "category": "compliance"},
+                    {
+                        "title": "Vehicle Requirements",
+                        "category": "compliance",
+                        "parallel_steps": [
+                            {"title": "Vehicle Registration", "category": "administrative"},
+                            {"title": "Vehicle Inspection", "category": "compliance"},
+                            {"title": "Equipment Installation", "category": "compliance"}
+                        ]
+                    },
+                    {"title": "Location Permits", "category": "compliance"},
+                    {"title": "Business Insurance", "category": "compliance"},
                     {"title": "Sales Tax Registration", "category": "financial"}
                 ]
             
-            # Default fallback steps
+            # Enhanced fallback steps for hair salon businesses
+            if "hair" in business_type.lower() or "salon" in business_type.lower() or "barber" in business_type.lower() or "beauty" in business_type.lower():
+                return [
+                    {"title": "Choose Business Structure", "category": "legal"},
+                    {"title": "Register Business Name", "category": "administrative"},
+                    {"title": "Get UBI Number", "category": "administrative"},
+                    {"title": "Federal EIN", "category": "administrative"},
+                    {"title": "Business License", "category": "legal"},
+                    {
+                        "title": "Cosmetology Licenses",
+                        "category": "compliance",
+                        "parallel_steps": [
+                            {"title": "Cosmetology License", "category": "compliance"},
+                            {"title": "Barber License (if applicable)", "category": "compliance"},
+                            {"title": "Esthetician License (if applicable)", "category": "compliance"}
+                        ]
+                    },
+                    {
+                        "title": "Location Setup",
+                        "category": "compliance",
+                        "parallel_steps": [
+                            {"title": "Find Suitable Location", "category": "administrative"},
+                            {"title": "Sign Lease Agreement", "category": "legal"},
+                            {"title": "Obtain Zoning Permits", "category": "compliance"}
+                        ]
+                    },
+                    {
+                        "title": "Health & Safety Requirements",
+                        "category": "compliance",
+                        "parallel_steps": [
+                            {"title": "Health Department Inspection", "category": "compliance"},
+                            {"title": "Fire Safety Inspection", "category": "compliance"},
+                            {"title": "Set Up Sanitation Stations", "category": "compliance"}
+                        ]
+                    },
+                    {"title": "Equipment & Supplies", "category": "administrative"},
+                    {"title": "Business Insurance", "category": "compliance"},
+                    {"title": "Sales Tax Registration", "category": "financial"},
+                    {"title": "Marketing & Advertising", "category": "administrative"}
+                ]
+            
+            # Get formation steps from knowledge base
+            formation_steps = await self._get_formation_steps_from_knowledge(business_type)
+            
+            # If no steps were found, use generic steps
+            if not formation_steps:
+                return [
+                    {"title": "Choose Business Structure", "category": "legal"},
+                    {"title": "Register Business Name", "category": "administrative"},
+                    {"title": "Get UBI Number", "category": "administrative"},
+                    {"title": "Federal EIN", "category": "administrative"},
+                    {"title": "Business License", "category": "legal"},
+                    {"title": "Industry Permits", "category": "compliance"},
+                    {"title": "Business Insurance", "category": "compliance"},
+                    {"title": "Sales Tax Registration", "category": "financial"}
+                ]
+            
+            return formation_steps
+        except Exception as e:
+            logger.error(f"Error getting formation steps: {str(e)}")
+            # Return generic steps as fallback
             return [
-                {"title": "Business Registration", "category": "legal"},
+                {"title": "Choose Business Structure", "category": "legal"},
+                {"title": "Register Business Name", "category": "administrative"},
                 {"title": "Get UBI Number", "category": "administrative"},
                 {"title": "Federal EIN", "category": "administrative"},
                 {"title": "Business License", "category": "legal"},
-                {"title": "Industry Permits", "category": "compliance"}
+                {"title": "Industry Permits", "category": "compliance"},
+                {"title": "Business Insurance", "category": "compliance"},
+                {"title": "Sales Tax Registration", "category": "financial"}
             ]
     
     def _get_step_style(self, category: str) -> str:
